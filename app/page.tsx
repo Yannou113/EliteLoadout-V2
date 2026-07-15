@@ -67,8 +67,8 @@ export default function Home() {
           <Image
             src="/LogoEL.png"
             alt="Logo EliteLoadout"
-            width={52}
-            height={52}
+            width={72}
+            height={72}
             priority
             className="brand-logo"
           />
@@ -189,9 +189,7 @@ export default function Home() {
 
         <div>
           <p className="eyebrow">ELITE AI</p>
-
           <h2>Une classe pensée pour ton style de jeu</h2>
-
           <p>
             Décris ton mode, ta manière de jouer et tes préférences. Elite AI
             recommandera uniquement des classes validées dans notre base.
@@ -204,12 +202,16 @@ export default function Home() {
       </section>
 
       <footer>
-        <a className="brand" href="#">
+        <a
+          className="brand"
+          href="#"
+          aria-label="Retour à l’accueil EliteLoadout"
+        >
           <Image
             src="/LogoEL.png"
             alt="Logo EliteLoadout"
-            width={44}
-            height={44}
+            width={60}
+            height={60}
             className="brand-logo"
           />
 
