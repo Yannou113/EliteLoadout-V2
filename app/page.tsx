@@ -9,53 +9,35 @@ import {
 
 import { ModeCard } from "@/components/mode-card";
 import { WeaponCard } from "@/components/weapon-card";
+import { getTopWeapons } from "@/lib/weapons";
 
 const modes = [
   {
     icon: Crosshair,
     title: "Battle Royale",
-    description: "Longue portée, contrôle et rotations.",
+    description:
+      "Les meilleures classes pour les grandes cartes, les rotations et les combats à longue portée.",
     accent: "red",
   },
   {
     icon: Trophy,
     title: "Ranked",
-    description: "Classes fiables pour gagner des SR.",
+    description:
+      "Les configurations les plus fiables pour jouer en équipe et gagner des SR.",
     accent: "red",
   },
   {
     icon: Box,
     title: "Résurgence",
-    description: "Mobilité et combats rapprochés.",
+    description:
+      "Des classes rapides et mobiles adaptées aux combats rapprochés permanents.",
     accent: "red",
   },
 ];
 
-const weapons = [
-  {
-    name: "Carbon 57",
-    category: "Mitraillette",
-    score: 98,
-    tier: "S+",
-    tags: ["Mobilité", "Rush", "TTK rapide"],
-  },
-  {
-    name: "MXR-17",
-    category: "Fusil d’assaut",
-    score: 96,
-    tier: "S+",
-    tags: ["Longue portée", "Stable", "Polyvalent"],
-  },
-  {
-    name: "Strider 300",
-    category: "Fusil de précision",
-    score: 91,
-    tier: "S",
-    tags: ["Sniper", "Précision", "Portée"],
-  },
-];
-
 export default function Home() {
+  const weapons = getTopWeapons(6);
+
   return (
     <main>
       <header className="site-header">
@@ -102,8 +84,9 @@ export default function Home() {
           </h1>
 
           <p className="hero-description">
-            Les meilleures classes, un assistant IA spécialisé et bientôt un
-            configurateur 3D interactif pour chaque arme.
+            Retrouve les meilleures classes du moment, les accessoires
+            recommandés et bientôt un assistant IA spécialisé ainsi qu’un
+            configurateur 3D interactif.
           </p>
 
           <div className="hero-actions">
@@ -113,7 +96,7 @@ export default function Home() {
             </a>
 
             <a className="secondary-button" href="#ai">
-              Tester Elite AI
+              Découvrir Elite AI
             </a>
           </div>
         </div>
@@ -154,7 +137,13 @@ export default function Home() {
 
         <div className="mode-grid">
           {modes.map((mode) => (
-            <ModeCard key={mode.title} {...mode} />
+            <ModeCard
+              key={mode.title}
+              icon={mode.icon}
+              title={mode.title}
+              description={mode.description}
+              accent={mode.accent}
+            />
           ))}
         </div>
       </section>
@@ -174,9 +163,13 @@ export default function Home() {
         <div className="weapon-grid">
           {weapons.map((weapon, index) => (
             <WeaponCard
-              key={weapon.name}
+              key={weapon.id}
               rank={index + 1}
-              {...weapon}
+              name={weapon.name}
+              category={weapon.category}
+              score={weapon.score}
+              tier={weapon.tier}
+              tags={weapon.tags}
             />
           ))}
         </div>
@@ -189,14 +182,21 @@ export default function Home() {
 
         <div>
           <p className="eyebrow">ELITE AI</p>
-          <h2>Une classe pensée pour ton style de jeu</h2>
+
+          <h2>Une classe adaptée à ton style de jeu</h2>
+
           <p>
-            Décris ton mode, ta manière de jouer et tes préférences. Elite AI
-            recommandera uniquement des classes validées dans notre base.
+            Indique ton mode de jeu, ton niveau et ta manière de jouer.
+            Elite AI analysera les classes disponibles dans notre base et
+            te proposera les configurations les plus adaptées.
           </p>
         </div>
 
-        <button className="primary-button" type="button" disabled>
+        <button
+          className="primary-button"
+          type="button"
+          disabled
+        >
           Prochain sprint
         </button>
       </section>
