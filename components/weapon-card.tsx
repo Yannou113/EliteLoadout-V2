@@ -1,4 +1,7 @@
+import Link from "next/link";
+
 type WeaponCardProps = {
+  slug: string;
   rank: number;
   name: string;
   category: string;
@@ -8,6 +11,7 @@ type WeaponCardProps = {
 };
 
 export function WeaponCard({
+  slug,
   rank,
   name,
   category,
@@ -16,10 +20,12 @@ export function WeaponCard({
   tags,
 }: WeaponCardProps) {
   return (
-    <article className="weapon-card">
-
+    <Link
+      href={`/weapons/${slug}`}
+      className="weapon-card"
+      aria-label={`Voir la classe meta ${name}`}
+    >
       <div className="weapon-visual">
-
         <span className="weapon-rank">
           #{rank}
         </span>
@@ -29,11 +35,9 @@ export function WeaponCard({
         </span>
 
         {name}
-
       </div>
 
       <div className="weapon-content">
-
         <h3>{name}</h3>
 
         <p className="weapon-category">
@@ -41,19 +45,15 @@ export function WeaponCard({
         </p>
 
         <div className="tags">
-
           {tags.map((tag) => (
             <span key={tag}>
               {tag}
             </span>
           ))}
-
         </div>
-
       </div>
 
       <div className="weapon-score">
-
         <span>
           SCORE META
         </span>
@@ -61,9 +61,7 @@ export function WeaponCard({
         <strong>
           {score}/100
         </strong>
-
       </div>
-
-    </article>
+    </Link>
   );
 }
