@@ -1,4 +1,23 @@
 import type { Metadata } from "next";
 import "./globals.css";
-export const metadata: Metadata = { title: "EliteLoadout — FPS Meta Platform", description: "Classes meta, assistant IA et configurateur 3D pour les joueurs FPS." };
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="fr"><body>{children}</body></html>; }
+
+export const metadata: Metadata = {
+  title: "EliteLoadout",
+  description:
+    "Les meilleures classes Meta Call of Duty, configurateur 3D et assistant IA.",
+  icons: {
+    icon: "/LogoEL.png",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="fr">
+      <body>{children}</body>
+    </html>
+  );
+}
