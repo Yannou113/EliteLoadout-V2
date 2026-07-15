@@ -614,3 +614,253 @@ footer {
     gap: 18px;
   }
 }
+/* =========================================================
+   PAGES DE DÉTAIL DES ARMES
+   ========================================================= */
+
+.weapon-page {
+  min-height: 100vh;
+  padding-bottom: 90px;
+  background:
+    radial-gradient(
+      circle at 75% 10%,
+      rgba(255, 32, 32, 0.12),
+      transparent 28rem
+    ),
+    var(--background);
+}
+
+.weapon-page-header {
+  min-height: 76px;
+  padding: 0 7vw;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  background: rgba(5, 5, 5, 0.9);
+  backdrop-filter: blur(16px);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  transform: translateX(-3px);
+}
+
+.weapon-detail-hero {
+  padding: 85px 7vw 60px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 70px;
+  align-items: end;
+  border-bottom: 1px solid var(--line);
+}
+
+.weapon-detail-hero h1 {
+  margin: 12px 0 10px;
+  font-size: clamp(64px, 9vw, 118px);
+  line-height: 0.88;
+  letter-spacing: -0.065em;
+}
+
+.weapon-role {
+  margin: 0;
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.weapon-description {
+  max-width: 760px;
+  margin: 26px 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.weapon-tags-large {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.weapon-tags-large span {
+  padding: 8px 10px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.weapon-ranking-panel {
+  display: grid;
+  gap: 10px;
+}
+
+.weapon-ranking-panel div {
+  padding: 20px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255, 32, 32, 0.06),
+      transparent
+    ),
+    var(--panel);
+}
+
+.weapon-ranking-panel span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.weapon-ranking-panel strong {
+  color: var(--accent);
+  font-size: 27px;
+}
+
+.weapon-detail-grid {
+  padding: 60px 7vw;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.3fr)
+    minmax(300px, 0.7fr);
+  gap: 18px;
+}
+
+.attachments-panel,
+.weapon-info-panel {
+  padding: 30px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.attachments-panel {
+  box-shadow: 0 0 35px rgba(255, 32, 32, 0.05);
+}
+
+.panel-heading h2 {
+  margin: 8px 0 25px;
+  font-size: 36px;
+  letter-spacing: -0.04em;
+}
+
+.attachments-list {
+  display: grid;
+  gap: 10px;
+}
+
+.attachment-row,
+.weapon-info-row {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid var(--line);
+  background: var(--panel-soft);
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.attachment-row:hover {
+  border-color: var(--accent);
+  transform: translateX(4px);
+  box-shadow: 0 0 20px rgba(255, 32, 32, 0.09);
+}
+
+.attachment-row span,
+.weapon-info-row span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.attachment-row strong,
+.weapon-info-row strong {
+  color: var(--text);
+  text-align: right;
+  font-size: 12px;
+}
+
+.weapon-info-panel {
+  align-self: start;
+}
+
+.weapon-info-row {
+  margin-bottom: 9px;
+}
+
+.weapon-info-row strong {
+  max-width: 65%;
+}
+
+.weapon-code-button {
+  width: 100%;
+  margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+  .weapon-detail-hero,
+  .weapon-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .weapon-detail-hero {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 620px) {
+  .weapon-page-header {
+    padding: 0 6vw;
+  }
+
+  .weapon-detail-hero {
+    padding: 55px 6vw 42px;
+  }
+
+  .weapon-detail-hero h1 {
+    font-size: 58px;
+  }
+
+  .weapon-detail-grid {
+    padding: 42px 6vw;
+  }
+
+  .attachments-panel,
+  .weapon-info-panel {
+    padding: 22px;
+  }
+
+  .attachment-row,
+  .weapon-info-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .attachment-row strong,
+  .weapon-info-row strong {
+    max-width: 100%;
+    text-align: left;
+  }
+}
