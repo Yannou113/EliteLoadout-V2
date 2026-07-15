@@ -164,6 +164,7 @@ export default function Home() {
           {weapons.map((weapon, index) => (
             <WeaponCard
               key={weapon.id}
+              slug={weapon.slug}
               rank={index + 1}
               name={weapon.name}
               category={weapon.category}
