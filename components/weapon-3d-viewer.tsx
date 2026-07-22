@@ -1,135 +1,48 @@
 "use client";
 
+import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
+  Bounds,
+  Center,
   ContactShadows,
   Environment,
+  Html,
   OrbitControls,
+  useGLTF,
 } from "@react-three/drei";
 
 type Weapon3DViewerProps = {
   weaponName: string;
 };
 
-function DemoWeapon() {
+function Carbon57Model() {
+  const model = useGLTF("/models/carbon-57/scene.gltf");
+
   return (
-    <group
-      rotation={[0, -0.35, 0]}
-      position={[0, -0.15, 0]}
-    >
-      {/* Corps principal */}
-      <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[2.8, 0.55, 0.55]} />
-        <meshStandardMaterial
-          color="#252525"
-          metalness={0.75}
-          roughness={0.28}
-        />
-      </mesh>
+    <Bounds fit clip observe margin={1.25}>
+      <Center>
+        <group
+          rotation={[
+            0,
+            Math.PI / 2,
+            0,
+          ]}
+        >
+          <primitive object={model.scene} />
+        </group>
+      </Center>
+    </Bounds>
+  );
+}
 
-      {/* Partie supérieure */}
-      <mesh position={[0.15, 0.42, 0]}>
-        <boxGeometry args={[1.8, 0.28, 0.42]} />
-        <meshStandardMaterial
-          color="#3a3a3a"
-          metalness={0.7}
-          roughness={0.25}
-        />
-      </mesh>
-
-      {/* Canon */}
-      <mesh
-        position={[2.1, 0.08, 0]}
-        rotation={[0, 0, Math.PI / 2]}
-      >
-        <cylinderGeometry args={[0.14, 0.14, 1.7, 32]} />
-        <meshStandardMaterial
-          color="#1a1a1a"
-          metalness={0.85}
-          roughness={0.2}
-        />
-      </mesh>
-
-      {/* Silencieux */}
-      <mesh
-        position={[3.1, 0.08, 0]}
-        rotation={[0, 0, Math.PI / 2]}
-      >
-        <cylinderGeometry args={[0.22, 0.22, 1.1, 32]} />
-        <meshStandardMaterial
-          color="#111111"
-          metalness={0.75}
-          roughness={0.25}
-        />
-      </mesh>
-
-      {/* Crosse */}
-      <mesh position={[-1.95, 0.05, 0]}>
-        <boxGeometry args={[1.2, 0.42, 0.46]} />
-        <meshStandardMaterial
-          color="#202020"
-          metalness={0.45}
-          roughness={0.45}
-        />
-      </mesh>
-
-      {/* Poignée */}
-      <mesh
-        position={[-0.25, -0.75, 0]}
-        rotation={[0, 0, -0.22]}
-      >
-        <boxGeometry args={[0.38, 1.05, 0.42]} />
-        <meshStandardMaterial
-          color="#1c1c1c"
-          metalness={0.35}
-          roughness={0.5}
-        />
-      </mesh>
-
-      {/* Chargeur */}
-      <mesh
-        position={[0.55, -0.92, 0]}
-        rotation={[0, 0, -0.12]}
-      >
-        <boxGeometry args={[0.55, 1.35, 0.46]} />
-        <meshStandardMaterial
-          color="#151515"
-          metalness={0.5}
-          roughness={0.38}
-        />
-      </mesh>
-
-      {/* Optique */}
-      <group position={[0.25, 0.85, 0]}>
-        <mesh>
-          <boxGeometry args={[0.75, 0.28, 0.38]} />
-          <meshStandardMaterial
-            color="#151515"
-            metalness={0.65}
-            roughness={0.25}
-          />
-        </mesh>
-
-        <mesh position={[0.18, 0.03, 0.21]}>
-          <circleGeometry args={[0.12, 32]} />
-          <meshStandardMaterial
-            color="#ff2020"
-            emissive="#ff2020"
-            emissiveIntensity={2}
-          />
-        </mesh>
-      </group>
-
-      {/* Détails rouges */}
-      <mesh position={[0.15, 0.05, 0.3]}>
-        <boxGeometry args={[1.1, 0.08, 0.04]} />
-        <meshStandardMaterial
-          color="#ff2020"
-          emissive="#ff2020"
-          emissiveIntensity={0.7}
-        />
-      </mesh>
-    </group>
+function LoadingModel() {
+  return (
+    <Html center>
+      <div className="weapon-3d-loading">
+        Chargement du modèle 3D…
+      </div>
+    </Html>
   );
 }
 
@@ -146,63 +59,71 @@ export function Weapon3DViewer({
         <h2>{weaponName} en 3D</h2>
 
         <p>
-          Fais glisser avec la souris ou le doigt pour faire tourner l’arme.
-          Utilise la molette ou deux doigts pour zoomer.
+          Fais glisser pour faire tourner l’arme et utilise la molette pour
+          zoomer.
         </p>
       </div>
 
       <div className="weapon-3d-canvas">
         <Canvas
           camera={{
-            position: [0, 1.2, 7.5],
-            fov: 42,
+            position: [0, 0.5, 7],
+            fov: 38,
           }}
-          dpr={[1, 1.6]}
+          dpr={[1, 1.5]}
           shadows
         >
-          <color attach="background" args={["#090909"]} />
+          <color
+            attach="background"
+            args={["#080808"]}
+          />
 
-          <ambientLight intensity={0.7} />
+          <ambientLight intensity={2} />
 
           <directionalLight
-            position={[4, 5, 4]}
-            intensity={2.2}
+            position={[5, 6, 5]}
+            intensity={4}
             castShadow
           />
 
+          <directionalLight
+            position={[-4, 2, -4]}
+            intensity={2}
+            color="#ffffff"
+          />
+
           <pointLight
-            position={[-3, 2, 3]}
-            intensity={35}
+            position={[-4, 3, 4]}
+            intensity={30}
             color="#ff2020"
           />
 
-          <pointLight
-            position={[3, -1, -2]}
-            intensity={18}
-            color="#7a0000"
-          />
+          <Suspense fallback={<LoadingModel />}>
+            <Carbon57Model />
 
-          <DemoWeapon />
+            <Environment preset="city" />
 
-          <ContactShadows
-            position={[0, -1.7, 0]}
-            opacity={0.48}
-            scale={12}
-            blur={2.8}
-            far={4}
-          />
-
-          <Environment preset="city" />
+            <ContactShadows
+              position={[0, -1.8, 0]}
+              opacity={0.4}
+              scale={14}
+              blur={3}
+              far={6}
+            />
+          </Suspense>
 
           <OrbitControls
+            makeDefault
             enablePan={false}
-            minDistance={4.5}
-            maxDistance={10}
+            minDistance={2}
+            maxDistance={12}
             autoRotate
-            autoRotateSpeed={0.8}
+            autoRotateSpeed={0.55}
           />
         </Canvas>
       </div>
     </section>
   );
 }
+
+useGLTF.preload("/models/carbon-57/scene.gltf");

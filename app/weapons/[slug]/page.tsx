@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
+import { Weapon3DViewer } from "@/components/weapon-3d-viewer";
 import {
   getWeaponBySlug,
   weapons,
@@ -80,6 +81,8 @@ export default async function WeaponPage({
           </div>
         </div>
       </section>
+
+      <Weapon3DViewer weaponName={weapon.name} />
 
       <section className="weapon-detail-grid">
         <article className="attachments-panel">
